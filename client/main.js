@@ -13,13 +13,13 @@ let data = fetch("https://curriculum-api.codesmith.io/messages", {
     getMessages(messages);
     return messages;
   }).then(previousSet => {
-    setTimeout(compareAndGet(previousSet, 1000));
+    setTimeout(compareAndGet(previousSet, 500));
   })
   .catch(function(error) {
     console.log("Request failed:" + error.message);
   });
 
-  
+
 
 function getMessages(test) {
   for (let i = test.length - 1; i >= 0; i--) { // element test
@@ -36,7 +36,7 @@ function getMessages(test) {
       "   " +
       test[i]["created_at"].slice(11, 16);
     first.innerHTML =
-      "<h6>" + test[i].created_by + "</h6> <span> " + readableDate + " </span>";
+      "<h6>" + test[i].created_by + "</h6> <span class='date'> " + readableDate + " </span>";
     wholeMessageBox.appendChild(first);
 
     let second = document.createElement("div");
@@ -48,7 +48,7 @@ function getMessages(test) {
     // display.scrollTo(0, );
   }
 
-  
+
 }
 
 const button = document.querySelector('button');
@@ -77,7 +77,7 @@ function compareAndGet(prev) {
     }
     return messages;
   }).then(previousSet => {
-    setTimeout(compareAndGet(previousSet, 1000));
+    setTimeout(compareAndGet(previousSet, 500));
   })
   .catch(function(error) {
     console.log("Request failed:" + error.message);
@@ -88,10 +88,12 @@ function postMessage() {
     const input = document.querySelector('#input');
     const message = input.value;
     input.value = '';
+    const username = document.querySelector('#username').value;
+
 
 
     const body = {
-      'created_by': 'Three Musketeers',
+      'created_by': username,
       'message': message
     }
 
@@ -111,5 +113,5 @@ function postMessage() {
     //     getMessages(data);
     //   })
 
-    
+
 }
